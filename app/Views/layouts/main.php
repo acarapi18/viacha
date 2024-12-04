@@ -9,18 +9,9 @@
     <!-- Bootstrap & AdminLTE CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
-    <link rel="stylesheet" href="<?= base_url('dist/css/adminlte.min.css') ?>">
-    <link rel="stylesheet" href="<?= base_url('plugins/fontawesome-free/css/all.min.css') ?>">
-
-    <!-- DataTables CSS -->
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css">
-
-    <!-- FontAwesome para los iconos -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
 
-    <!-- SweetAlert CSS -->
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css">
+
 
     <?= $this->renderSection('styles') ?>
 </head>
@@ -89,9 +80,11 @@
         <!-- /.content-wrapper -->
 
         <footer class="main-footer">
-            <strong>Copyright &copy; 2024 <a href="#">Tu Proyecto</a>.</strong>
-            Todos los derechos reservados.
-        </footer>
+   <div class="float-right d-none d-sm-block">
+      <b>Version</b> 1.0.0
+   </div>
+   <strong>&copy; 2024 TechViacha.</strong> Todos los derechos reservados.
+</footer>
     </div>
     <!-- ./wrapper -->
 

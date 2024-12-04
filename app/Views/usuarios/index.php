@@ -3,16 +3,14 @@
 <?= $this->section('content') ?>
 <div class="card">
     <div class="card-header">
-        <h3 class="card-title">Gestión de Usuarios</h3>
+        <h3 class="card-title"><b><?= $title; ?></b></h3>
         <button class="btn btn-primary float-right" data-toggle="modal" data-target="#modalAdd">
-            Agregar Usuario
+            Agregar
         </button>
     </div>
-    <div class="card-body">
-        <!-- Aquí el contenido del CRUD de roles -->
-        <table class="table table-bordered">
+    <div class="card-body">       
             <!-- Tabla de roles -->
-            <table class="table table-bordered datatable">
+            <table id="usuariosTable" class="table table-bordered datatable">
                 <thead>
                     <tr>
                         <th>Nombre</th>
@@ -47,7 +45,7 @@
                     <?php endforeach; ?>
                 </tbody>
             </table>
-        </table>
+        
     </div>
 </div>
 
@@ -66,46 +64,56 @@
                 <div class="modal-body">
                     <div class="input-group">
                         <div class="input-group-prepend">
-                            <span class="input-group-text" id="">Nombre:</span>
+                            <span class="input-group-text"><i class="far fa-id-badge"></i></span>
                         </div>
-                        <input type="text" name="nombre" class="form-control" required>
+                        <input type="text" name="nombre" placeholder="Nombres" class="form-control" required>
                     </div>
                     <p>
                     <div class="input-group">
                         <div class="input-group-prepend">
-                            <span class="input-group-text" id="">Apellido:</span>
+                            <span class="input-group-text"><i class="fas fa-portrait"></i></span>
                         </div>
-                        <input type="text" name="apellido" class="form-control" required>
+                        <input type="text" name="apellido" placeholder="Apellidos" class="form-control" required>
                     </div>
                     </p>
                     <div class="input-group">
                         <div class="input-group-prepend">
-                            <span class="input-group-text" id="">Usuario:</span>
+                            <span class="input-group-text"><i class="fas fa-user-lock"></i></span>
                         </div>
-                        <input type="text" name="usuario" class="form-control" required>
+                        <input type="text" name="usuario" placeholder="Usuario" class="form-control" required>
                     </div>
                     <p>
                     <div class="input-group">
                         <div class="input-group-prepend">
-                            <span class="input-group-text" id="">Contraseña:</span>
+                            <span class="input-group-text"><i class="fas fa-key"></i></span>
                         </div>
-                        <input type="password" name="password" class="form-control" required>
+                        <input type="password" name="password" placeholder="Contraseña" class="form-control" required>
                     </div>
                     <p>
                     <div class="input-group">
-                        <label class="input-group-text" for="inputGroupSelect01">Rol:</label>
-                        <select name="rol" class="form-control" id="">
-                            <option selected>Seleccionar...</option>
+                        <label class="input-group-text"><i class="fas fa-fingerprint"></i></label>
+                        <select name="rol" class="form-control" id="rolAdd" required>
+                            <option selected>Rol</option>
                             <option value="Administrador">Administrador</option>
-                            <option value="Tecnico">Tecnico</option>
-                            <option value="Responsable">Responsable</option>
+                            <option value="Técnico">Técnico</option>
+                            <option value="Encargado">Encargado</option>
+                        </select>
+                    </div>
+                    <p>
+                    <div class="input-group" id="unidadEducativaAdd" style="display:none;">
+                        <label class="input-group-text"><i class="fas fa-school"></i></label>
+                        <select name="id_unidad_educativa" class="form-control">
+                            <option value="">Unidad Educativa</option>
+                            <?php foreach ($unidades as $unidad): ?>
+                                <option value="<?= $unidad['id'] ?>"><?= $unidad['nombre'] ?></option>
+                            <?php endforeach; ?>
                         </select>
                     </div>
                     <p>
                     <div class="input-group">
-                        <label class="input-group-text" for="inputGroupSelect01">Estado:</label>
-                        <select name="estado" class="form-control" id="">
-                            <option selected>Seleccionar...</option>
+                        <label class="input-group-text"><i class="fas fa-toggle-on"></i></label>
+                        <select name="estado" class="form-control" required>
+                            <option selected>Estado</option>
                             <option value="Activo">Activo</option>
                             <option value="Inactivo">Inactivo</option>
                         </select>
@@ -134,39 +142,49 @@
                     <input type="hidden" name="id">
                     <div class="input-group">
                         <div class="input-group-prepend">
-                            <span class="input-group-text" id="">Nombre:</span>
+                            <span class="input-group-text"><i class="far fa-id-badge"></i></span>
                         </div>
-                        <input type="text" name="nombre" class="form-control" required>
+                        <input type="text" name="nombre" placeholder="Nombres" class="form-control" required>
                     </div>
                     <p>
                     <div class="input-group">
                         <div class="input-group-prepend">
-                            <span class="input-group-text" id="">Apellido:</span>
+                            <span class="input-group-text"><i class="fas fa-portrait"></i></span>
                         </div>
-                        <input type="text" name="apellido" class="form-control" required>
+                        <input type="text" name="apellido" placeholder="Apellidos" class="form-control" required>
                     </div>
                     </p>
                     <div class="input-group">
                         <div class="input-group-prepend">
-                            <span class="input-group-text" id="">Usuario:</span>
+                            <span class="input-group-text"><i class="fas fa-user-lock"></i></span>
                         </div>
-                        <input type="text" name="usuario" class="form-control" required>
+                        <input type="text" name="usuario" placeholder="Usuario" class="form-control" required>
                     </div>
                     <p>
                     <div class="input-group">
-                        <label class="input-group-text" for="inputGroupSelect01">Rol:</label>
-                        <select name="rol" class="form-control" id="">
+                        <label class="input-group-text"><i class="fas fa-fingerprint"></i></label>
+                        <select name="rol" class="form-control" id="rolEdit" required>
+                            <option selected>Rol</option>
                             <option value="Administrador">Administrador</option>
-                            <option value="Tecnico">Tecnico</option>
-                            <option value="Responsable">Responsable</option>
+                            <option value="Técnico">Técnico</option>
+                            <option value="Encargado">Encargado</option>
                         </select>
                     </div>
                     <p>
-
+                    <div class="input-group" id="unidadEducativaEdit" style="display:none;">
+                        <label class="input-group-text"><i class="fas fa-school"></i></label>
+                        <select name="id_unidad_educativa" class="form-control">
+                            <option value="">Unidad Educativa</option>
+                            <?php foreach ($unidades as $unidad): ?>
+                                <option value="<?= $unidad['id'] ?>"><?= $unidad['nombre'] ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                    <p>
                     <div class="input-group">
-                        <label class="input-group-text" for="inputGroupSelect01">Estado:</label>
-                        <select name="estado" class="form-control" id="">
-                            <option selected>Seleccionar...</option>
+                        <label class="input-group-text"><i class="fas fa-toggle-on"></i></label>
+                        <select name="estado" class="form-control" required>
+                            <option selected>Estado</option>
                             <option value="Activo">Activo</option>
                             <option value="Inactivo">Inactivo</option>
                         </select>
@@ -218,74 +236,106 @@
 </div>
 
 <script>
-    // Similar functionality para agregar, editar y eliminar como el CRUD anterior.
-    $(document).ready(function() {
-        // Agregar Usuario
-        $('#formAdd').submit(function(e) {
-            e.preventDefault();
-            $.ajax({
-                url: '<?= site_url('usuarios/store') ?>',
-                type: 'POST',
-                data: $(this).serialize(),
-                success: function(response) {
-                    $('#modalAdd').modal('hide');
-                    if (response.status == 'success') {
-                        Swal.fire('Agregado', 'El usuario ha sido agregado correctamente.', 'success').then(() => {
-                            location.reload();
-                        });
-                    } else {
-                        Swal.fire('Error', 'No se pudo agregar el usuario.', 'error');
-                    }
-                },
-                error: function() {
-                    Swal.fire('Error', 'Error en la solicitud.', 'error');
+$(document).ready(function() {
+    
+    // Función para mostrar/ocultar el campo Unidad Educativa según el rol
+    function toggleUnidadEducativa(rol, formType) {
+        if (rol === 'Encargado') {
+            $(`#unidadEducativa${formType}`).show();
+            $(`#unidadEducativa${formType} select`).attr('required', true);
+        } else {
+            $(`#unidadEducativa${formType}`).hide();
+            $(`#unidadEducativa${formType} select`).attr('required', false);
+        }
+    }
+
+    // Evento para el modal de agregar
+    $('#rolAdd').change(function() {
+        toggleUnidadEducativa($(this).val(), 'Add');
+    });
+
+    // Evento para el modal de editar
+    $('.btn-edit').click(function() {
+        const id = $(this).data('id');
+        $.ajax({
+            url: '<?= site_url('usuarios/getUsuario') ?>/' + id,
+            type: 'GET',
+            success: function(data) {
+                $('#formEdit input[name="id"]').val(data.id);
+                $('#formEdit input[name="nombre"]').val(data.nombre);
+                $('#formEdit input[name="apellido"]').val(data.apellido);
+                $('#formEdit input[name="usuario"]').val(data.usuario);
+                $('#formEdit select[name="rol"]').val(data.rol);
+                $('#formEdit select[name="estado"]').val(data.estado);
+
+                // Mostrar/ocultar Unidad Educativa basado en el rol
+                toggleUnidadEducativa(data.rol, 'Edit');
+                if (data.rol === 'Encargado') {
+                    $('#formEdit select[name="id_unidad_educativa"]').val(data.id_unidad_educativa);
                 }
-            });
+
+                // Mostrar el modal de edición
+                $('#modalEdit').modal('show');
+            },
+            error: function() {
+                Swal.fire('Error', 'No se pudo obtener la información del usuario.', 'error');
+            }
         });
-        // Editar Usuario - Abrir el modal con datos
-        $('.btn-edit').click(function() {
-            const id = $(this).data('id');
-            $.ajax({
-                url: '<?= site_url('usuarios/getUsuario') ?>/' + id,
-                type: 'GET',
-                success: function(data) {
-                    $('#formEdit input[name="id"]').val(data.id);
-                    $('#formEdit input[name="nombre"]').val(data.nombre);
-                    $('#formEdit input[name="apellido"]').val(data.apellido);
-                    $('#formEdit input[name="usuario"]').val(data.usuario);
-                    $('#formEdit input[name="id_rol"]').val(data.id_rol);
-                    $('#formEdit select[name="estado"]').val(data.estado);
-                    $('#modalEdit').modal('show');
-                },
-                error: function() {
-                    Swal.fire('Error', 'No se pudo obtener la información del usuario.', 'error');
+    });
+
+    // Cambio de rol en el modal de editar
+    $('#rolEdit').change(function() {
+        toggleUnidadEducativa($(this).val(), 'Edit');
+    });
+
+    // Agregar Usuario
+    $('#formAdd').submit(function(e) {
+        e.preventDefault();
+        $.ajax({
+            url: '<?= site_url('usuarios/store') ?>',
+            type: 'POST',
+            data: $(this).serialize(),
+            success: function(response) {
+                //$('#modalAdd').modal('hide');
+                if (response.status === 'success') {
+                    Swal.fire('Agregado', 'El usuario ha sido agregado correctamente.', 'success').then(() => {
+                        location.reload();
+                    });
+                } else {
+                    Swal.fire('Error', 'No se pudo agregar el usuario.', 'error');
                 }
-            });
+            },
+            error: function() {
+                Swal.fire('Error', 'Error en la solicitud.', 'error');
+            }
         });
-        // Actualizar Usuario
-        $('#formEdit').submit(function(e) {
-            e.preventDefault();
-            const id = $('#formEdit input[name="id"]').val();
-            $.ajax({
-                url: '<?= site_url('usuarios/update') ?>/' + id,
-                type: 'POST',
-                data: $(this).serialize(),
-                success: function(response) {
-                    $('#modalEdit').modal('hide');
-                    if (response.status == 'success') {
-                        Swal.fire('Actualizado', 'El usuario ha sido actualizado correctamente.', 'success').then(() => {
-                            location.reload();
-                        });
-                    } else {
-                        Swal.fire('Error', 'No se pudo actualizar el usuario.', 'error');
-                    }
-                },
-                error: function() {
-                    Swal.fire('Error', 'Error en la solicitud.', 'error');
+    });
+
+    // Actualizar Usuario
+    $('#formEdit').submit(function(e) {
+        e.preventDefault();
+        const id = $('#formEdit input[name="id"]').val();
+        $.ajax({
+            url: '<?= site_url('usuarios/update') ?>/' + id,
+            type: 'POST',
+            data: $(this).serialize(),
+            success: function(response) {
+                //$('#modalEdit').modal('hide');
+                if (response.status === 'success') {
+                    Swal.fire('Actualizado', 'El usuario ha sido actualizado correctamente.', 'success').then(() => {
+                        location.reload();
+                    });
+                } else {
+                    Swal.fire('Error', 'No se pudo actualizar el usuario.', 'error');
                 }
-            });
+            },
+            error: function() {
+                Swal.fire('Error', 'Error en la solicitud.', 'error');
+            }
         });
-        // Eliminar Usuario
+    });
+
+    // Eliminar Usuario
         $('.btn-delete').click(function() {
             const id = $(this).data('id');
             Swal.fire({
@@ -359,9 +409,14 @@
             });
         });
 
-
-
+// Inicializa el DataTable con búsqueda y paginación
+$('#usuariosTable').DataTable({
+        "language": {
+            "url": "<?= base_url('dist/js/DatatablesSpanish.json'); ?>"
+        }
     });
+
+});
 </script>
 
 <?= $this->endSection() ?>

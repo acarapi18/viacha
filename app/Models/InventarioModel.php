@@ -4,9 +4,9 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class EquiposModel extends Model
+class InventarioModel extends Model
 {
-    protected $table = 'equipos';
+    protected $table = 'inventario';
     protected $primaryKey = 'id';
     protected $allowedFields = [
         'id_unidad_educativa', // actualizado

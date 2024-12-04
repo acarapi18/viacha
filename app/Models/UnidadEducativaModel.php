@@ -11,18 +11,15 @@ class UnidadEducativaModel extends Model
     protected $allowedFields = [
         'codigo_rue',
         'nombre',
+        'telefono',
         'direccion',
         'dependencia',
         'area_geografica',
-        'estado',
-        'id_usuario'
+        'estado'
     ];
     protected $useTimestamps = true;
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
 
-    public function getUnidadesActivas()
-    {
-        return $this->where('estado', 'Activo')->findAll();
-    }
+    
 }

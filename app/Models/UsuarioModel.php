@@ -13,7 +13,8 @@ class UsuarioModel extends Model
         'apellido',
         'usuario',
         'password',
-        'id_rol',
+        'rol',
+        'id_unidad_educativa',
         'estado'
     ];
     protected $useTimestamps = true;
